@@ -6,9 +6,18 @@
         $email = $_POST['email'];
         $gender = $_POST['gender'];
         $id =$_GET['id'];
+                
+        if(!empty($_FILES['file']['name'])){
+            $imgname = $_FILES['file']['name'];
+            $tmp = $_FILES['file']['tmp_name'];
+            move_uploaded_file($tmp,"upload/".$imgname);
+            $extra =  ", `img` = '$imgname'";
+        }else{
+            $extra = "";
+        }
+        
 
-
-        $sql="UPDATE `members` SET  `f_name`='$fname', `l_name`='$lname', `email`='$email', `gender`='$gender' WHERE `id` = '$id'";
+        $sql="UPDATE `members` SET  `f_name`='$fname', `l_name`='$lname', `email`='$email', `gender`='$gender'  $extra WHERE `id` = '$id'";
         $result = mysqli_query($conn,$sql);
 
         if($result){
@@ -53,7 +62,7 @@
         ?>
         <!--Form Add  -->
         <div class="container d-flex justify-content-center">
-            <form action="" method="post" style="width:50vw; min-width:300px;">
+            <form action="" method="post" style="width:50vw; min-width:300px;" enctype="multipart/form-data">
             <input type="hidden" value="<?= $row['id']?>" >
                 <div class="row">
                     <div class="col">
@@ -69,6 +78,12 @@
                     <div class="mb-3">
                         <label class="from-label"> Email: </label>
                         <input type="text" class="form-control" name="email" value="<?= $row['email']?>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="from-label"> Upload img: </label>
+                    
+                        <input type="file" class="form-control"  name="file" >
                     </div>
 
                     <div class="from-group mb-3">

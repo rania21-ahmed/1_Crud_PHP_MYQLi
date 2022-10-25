@@ -5,9 +5,14 @@
         $lname = $_POST['last_name'];
         $email = $_POST['email'];
         $gender = $_POST['gender'];
+                        
+        $file_name = $_FILES['file']['name'];
 
+        $file_tmp =$_FILES['file']['tmp_name'];
 
-        $sql="INSERT INTO `members`(`id`, `f_name`, `l_name`, `email`, `gender`) VALUES (NULL,'$fname','$lname','$email','$gender')";
+        move_uploaded_file($file_tmp,"upload/".$file_name);
+
+        $sql="INSERT INTO `members`(`id`, `f_name`, `l_name`, `email`, `gender`,`img`) VALUES (NULL,'$fname','$lname','$email','$gender','$file_name')";
         $result = mysqli_query($conn,$sql);
 
         if($result){

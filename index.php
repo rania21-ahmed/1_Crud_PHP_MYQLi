@@ -39,6 +39,7 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Gender</th>
+                <th scope="col">img</th>
                 <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -57,6 +58,7 @@
                             <td scope="row"><?=$result['f_name']?></td>
                             <td scope="row"><?=$result['l_name']?></td>
                             <td scope="row"><?=$result['email']?></td>
+                            <td scope="row"><img style="width:100px;hight:100px" src="upload/<?=$result['img']?>"> </td>
                             <td scope="row"><?=$result['gender']?></td>
                             
                             <td>
